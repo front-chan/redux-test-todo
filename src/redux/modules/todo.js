@@ -31,13 +31,13 @@ const initialState = {
   // 여기는 어떤 값도 들어갈 수 있는지
   toDos: [
     {
-      id: 1,
+      id: Math.floor(Math.random() * 100000),
       title: "react를 배워봅시다",
       toDo: "react를 배워봅시다",
       done: true,
     },
     {
-      id: 2,
+      id: Math.floor(Math.random() * 100000),
       title: "react를 배워보까?",
       toDo: "react를 배워보까?",
       done: false,

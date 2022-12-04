@@ -47,7 +47,7 @@ function App() {
     dispatch(
       addToDo({
         // payload의 값
-        id: todos.length + 1,
+        id: Math.floor(Math.random() * 100000),
         title,
         toDo,
         done: true,
@@ -96,6 +96,7 @@ function App() {
         {todos.map((todo) =>
           todo.done === true ? (
             <div key={todo.id}>
+              <a href="https://www.naver.com">상세보기</a>
               <h4>{todo.title}</h4>
               <h6>{todo.toDo}</h6>
               <button onClick={() => onDeleteToDo(todo.id)}>삭제하기</button>
@@ -112,6 +113,7 @@ function App() {
         {todos.map((todo) =>
           todo.done === false ? (
             <div key={todo.id}>
+              <a href="https://www.naver.com">상세보기</a>
               <h4>{todo.title}</h4>
               <h6>{todo.toDo}</h6>
               <button onClick={() => onDeleteToDo(todo.id)}>삭제하기</button>
