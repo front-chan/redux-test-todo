@@ -2,12 +2,20 @@
 
 // Action Value
 const ADD_TODO = "ADD_TODO";
+const DELETE_TODO = "DELETE_TODO";
 
 // Action Creator
 export const addToDo = (payload) => {
   return {
     type: ADD_TODO,
     payload, // 여기에 지정하지 않는 이유 setValue와 비슷한 역할인지
+  };
+};
+
+export const deleteToDo = (payload) => {
+  return {
+    type: DELETE_TODO,
+    payload,
   };
 };
 
@@ -24,15 +32,16 @@ const initialState = {
     {
       id: 2,
       title: "react를 배워보까?",
-      toDo: "react를 배워봅시다",
+      toDo: "react를 배워보까?",
       done: false,
     },
   ],
+  //   ],
 };
 
 // Reducer
 const toDo = (state = initialState, action) => {
-  //   console.log(action.payload);
+  console.log(action.payload);
   //   console.log(action);
   //   console.log(state);
   switch (action.type) {
@@ -41,6 +50,18 @@ const toDo = (state = initialState, action) => {
         ...state,
         toDos: [...state.toDos, action.payload],
         // toDos: [...initialState.toDos, { title: action.payload }], // 에러
+      };
+    case DELETE_TODO:
+      return {
+        ...state,
+        toDos: state.toDos.filter((todo) => todo.id !== action.payload),
+
+        //   console.log(action); // payload값으로 id값이 들어와야 하는데 안들어옴
+        //   console.log(todo);
+
+        // payload.id
+        // newToDos: action.payload.id,
+        // console.log(newToDos)
       };
     default:
       return state;

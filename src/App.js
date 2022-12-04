@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 // import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { addToDo } from "./redux/modules/todo";
+import { addToDo, deleteToDo } from "./redux/modules/todo";
 import styled from "styled-components";
 
 function App() {
@@ -20,8 +20,12 @@ function App() {
   const [title, setTitle] = useState("");
   const [toDo, setToDo] = useState("");
   const todos = useSelector((state) => state.toDo.toDos);
-  // console.log(do)
-  // console.log(todos);
+  // const todoId = useSelector((state) => console.log(state));
+  // const selectId = useSelector((todos) => console.log(todos.toDo));
+  // const todoId = useSelector((todos.map((todo) => todo)) => console.log(selectId.id));
+  console.log(todos);
+  // console.log(todoId);
+  // console.log(selectId);
   const dispatch = useDispatch();
 
   // function onClickAddHandler() {
@@ -51,6 +55,10 @@ function App() {
     );
   }
 
+  function onDelete(id) {
+    // const newToDo = todos.filter((todo) => (todo.id = id));
+    dispatch(deleteToDo(id));
+  }
   // function onChangeHandler(event) {
   //   setTitle(event.target.value);
   // }
@@ -78,11 +86,13 @@ function App() {
         <Button>추가하기</Button>
       </Form>
       <div>
-        {todos.map((todo) => (
-          <Div key={todo.id}>
+        {todos?.map((todo) => (
+          <div key={todo.id}>
             <h4>{todo.title}</h4>
             <h6>{todo.toDo}</h6>
-          </Div>
+            <button onClick={() => onDelete(todo.id)}>삭제하기</button>
+            <button>완료</button>
+          </div>
         ))}
       </div>
     </div>
@@ -113,15 +123,16 @@ const Button = styled.button`
   padding: 5px 20px;
   background-color: rgb(232, 232, 232);
   border: 0;
+  cursor: pointer;
 `;
 
-const Div = styled.div`
-  width: 1200px;
-  margin-right: 20px;
-  display: flex;
-  flex-wrap: warp;
-  gap: 15px;
-`;
+// const Div = styled.div`
+//   width: 1200px;
+//   margin-right: 20px;
+//   display: flex;
+//   flex-wrap: warp;
+//   gap: 15px;
+// `;
 
 // const H4 = styled.h4`
 //   margin: 10px;
