@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./App.css";
-// import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { addToDo, deleteToDo, changeToDo } from "./redux/modules/todo";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import Form from "./components/form/Form";
+import List from "./components/list/List";
 
 function App() {
   // const [toDos, setToDos] = useState([
@@ -37,7 +38,7 @@ function App() {
   //   // setToDos([...toDos, newToDo]);
   // }
 
-  function onAddToDo(e) {
+  function onSubmit(e) {
     e.preventDefault();
     if (title === "" && toDo === "") {
       return;
@@ -71,31 +72,29 @@ function App() {
   }
 
   return (
-    <div>
-      <Form onSubmit={onAddToDo}>
-        <Label htmlFor="title">제목</Label>
-        <Input
-          type="text"
-          id="title"
-          value={title || ""}
-          onChange={(e) => setTitle(e.target.value)}
-          // required
-        />
-        <Label htmlFor="todo">내용</Label>
-        <Input
-          type="text"
-          id="todo"
-          value={toDo || ""}
-          onChange={(e) => setToDo(e.target.value)}
-          // required
-        />
-        <Button>추가하기</Button>
-      </Form>
-      <div>
-        <h1>Woring</h1>
-        {todos.map((todo) =>
-          todo.done === true ? (
-            <div key={todo.id}>
+    <StDiv app>
+      <Form
+        title={title}
+        toDo={toDo}
+        onSubmit={onSubmit}
+        setTitle={setTitle}
+        setToDo={setToDo}
+      ></Form>
+      <StMain>
+        <section>
+          <h1>Woring...🔥</h1>
+          <StDiv section>
+            {todos.map(
+              (todo) =>
+                todo.done === true ? (
+                  <List
+                    key={todo.id}
+                    todo={todo}
+                    onDeleteToDo={onDeleteToDo}
+                    onChangeToDo={onChangeToDo}
+                  ></List>
+                ) : null
+              /*<div key={todo.id}>
               <a href="https://www.naver.com">상세보기</a>
               <h4>{todo.title}</h4>
               <h6>{todo.toDo}</h6>
@@ -103,65 +102,54 @@ function App() {
               <button onClick={() => onChangeToDo(todo)}>
                 {todo.done === true ? "완료" : "취소"}
               </button>
-            </div>
-          ) : null
-        )}
-      </div>
-      <hr />
-      <div>
-        <h1>Done</h1>
-        {todos.map((todo) =>
-          todo.done === false ? (
-            <div key={todo.id}>
-              <a href="https://www.naver.com">상세보기</a>
-              <h4>{todo.title}</h4>
-              <h6>{todo.toDo}</h6>
-              <button onClick={() => onDeleteToDo(todo.id)}>삭제하기</button>
-              <button onClick={() => onChangeToDo(todo)}>
-                {todo.done === true ? "완료" : "취소"}
-              </button>
-            </div>
-          ) : null
-        )}
-      </div>
-    </div>
+            </div>*/
+            )}
+          </StDiv>
+        </section>
+        <section>
+          <h1>Done..!🎉</h1>
+          <StDiv section>
+            {todos.map((todo) =>
+              todo.done === false ? (
+                <List
+                  key={todo.id}
+                  todo={todo}
+                  onDeleteToDo={onDeleteToDo}
+                  onChangeToDo={onChangeToDo}
+                ></List>
+              ) : null
+            )}
+          </StDiv>
+        </section>
+      </StMain>
+    </StDiv>
   );
 }
 
 // component랑 같이 쓸 수 있는지?
-const Form = styled.form`
-  width: 1200px;
-  height: 100px;
-  margin: 20px 0 0 20px;
+
+const StDiv = styled.div`
+  ${(props) =>
+    props.app &&
+    css`
+      max-width: 1200px;
+      width: 95%;
+      margin: 20px auto;
+    `};
+  ${(props) =>
+    props.section &&
+    css`
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      gap: 12px;
+      flex-wrap: wrap;
+    `};
 `;
 
-const Label = styled.label`
-  margin-right: 10px;
+const StMain = styled.main`
+  margin-left: 30px;
 `;
-
-const Input = styled.input`
-  border-radius: 20px;
-  border: 1px solid rgb(232, 232, 232);
-  width: 250px;
-  height: 25px;
-  margin-right: 20px;
-`;
-
-const Button = styled.button`
-  border-radius: 20px;
-  padding: 5px 20px;
-  background-color: rgb(232, 232, 232);
-  border: 0;
-  cursor: pointer;
-`;
-
-// const Div = styled.div`
-//   width: 1200px;
-//   margin-right: 20px;
-//   display: flex;
-//   flex-wrap: warp;
-//   gap: 15px;
-// `;
 
 // const H4 = styled.h4`
 //   margin: 10px;
