@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 // import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
-import { addToDo, deleteToDo } from "./redux/modules/todo";
+import { addToDo, deleteToDo, changeToDo } from "./redux/modules/todo";
 import styled from "styled-components";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
   // const todoId = useSelector((state) => console.log(state));
   // const selectId = useSelector((todos) => console.log(todos.toDo));
   // const todoId = useSelector((todos.map((todo) => todo)) => console.log(selectId.id));
-  console.log(todos);
+  // console.log(todos);
   // console.log(todoId);
   // console.log(selectId);
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function App() {
   //   // setToDos([...toDos, newToDo]);
   // }
 
-  function onSubmit(e) {
+  function onAddToDo(e) {
     e.preventDefault();
     if (title === "" && toDo === "") {
       return;
@@ -55,7 +55,7 @@ function App() {
     );
   }
 
-  function onDelete(id) {
+  function onDeleteToDo(id) {
     // const newToDo = todos.filter((todo) => (todo.id = id));
     dispatch(deleteToDo(id));
   }
@@ -64,9 +64,15 @@ function App() {
   // }
   // console.log(title);
 
+  function onChangeToDo(todos) {
+    // console.log(id, done);
+    // console.log(todos);
+    dispatch(changeToDo(todos));
+  }
+
   return (
     <div>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onAddToDo}>
         <Label htmlFor="title">제목</Label>
         <Input
           type="text"
@@ -86,14 +92,35 @@ function App() {
         <Button>추가하기</Button>
       </Form>
       <div>
-        {todos?.map((todo) => (
-          <div key={todo.id}>
-            <h4>{todo.title}</h4>
-            <h6>{todo.toDo}</h6>
-            <button onClick={() => onDelete(todo.id)}>삭제하기</button>
-            <button>완료</button>
-          </div>
-        ))}
+        <h1>Woring</h1>
+        {todos.map((todo) =>
+          todo.done === true ? (
+            <div key={todo.id}>
+              <h4>{todo.title}</h4>
+              <h6>{todo.toDo}</h6>
+              <button onClick={() => onDeleteToDo(todo.id)}>삭제하기</button>
+              <button onClick={() => onChangeToDo(todo)}>
+                {todo.done === true ? "완료" : "취소"}
+              </button>
+            </div>
+          ) : null
+        )}
+      </div>
+      <hr />
+      <div>
+        <h1>Done</h1>
+        {todos.map((todo) =>
+          todo.done === false ? (
+            <div key={todo.id}>
+              <h4>{todo.title}</h4>
+              <h6>{todo.toDo}</h6>
+              <button onClick={() => onDeleteToDo(todo.id)}>삭제하기</button>
+              <button onClick={() => onChangeToDo(todo)}>
+                {todo.done === true ? "완료" : "취소"}
+              </button>
+            </div>
+          ) : null
+        )}
       </div>
     </div>
   );

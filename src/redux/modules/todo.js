@@ -3,7 +3,7 @@
 // Action Value
 const ADD_TODO = "ADD_TODO";
 const DELETE_TODO = "DELETE_TODO";
-
+const CHANGE_TODO = "CHANGE_TODO";
 // Action Creator
 export const addToDo = (payload) => {
   return {
@@ -15,6 +15,13 @@ export const addToDo = (payload) => {
 export const deleteToDo = (payload) => {
   return {
     type: DELETE_TODO,
+    payload,
+  };
+};
+
+export const changeToDo = (payload) => {
+  return {
+    type: CHANGE_TODO,
     payload,
   };
 };
@@ -41,7 +48,7 @@ const initialState = {
 
 // Reducer
 const toDo = (state = initialState, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   //   console.log(action);
   //   console.log(state);
   switch (action.type) {
@@ -55,13 +62,35 @@ const toDo = (state = initialState, action) => {
       return {
         ...state,
         toDos: state.toDos.filter((todo) => todo.id !== action.payload),
-
         //   console.log(action); // payload값으로 id값이 들어와야 하는데 안들어옴
         //   console.log(todo);
 
         // payload.id
         // newToDos: action.payload.id,
         // console.log(newToDos)
+      };
+    case CHANGE_TODO:
+      return {
+        ...state,
+        toDos: state.toDos.map((todo) => {
+          // console.log(action.payload);
+          return todo.id === action.payload.id
+            ? { ...todo, done: !action.payload.done }
+            : { ...todo };
+          // console.log(action.payload);
+          /*
+          if (todo.id === action.payload.id) {
+            return {
+              ...todo,
+              done: !todo.done,
+            };
+          } else if (todo.id !== action.payload.id) {
+            return {
+              ...todo,
+            };
+          }
+          */
+        }),
       };
     default:
       return state;
