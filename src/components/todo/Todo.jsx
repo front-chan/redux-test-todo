@@ -23,9 +23,24 @@ function Todo() {
               <StButton>이전으로</StButton>
             </Link>
           </StDiv>
+          {/* <StH1>{todoIdList.title}</StH1> */}
+          {/* {(todos) =>
+            todos.done === false ? (
+              <StH1 style={{ textDecoration: "line-through" }}>
+                {todoIdList.title}
+              </StH1>
+            ) : (
+              <StH1>{todoIdList.title}</StH1>
+            )
+          } */}
           <StH1>{todoIdList.title}</StH1>
           <StP>{todoIdList.toDo}</StP>
         </div>
+        <StP complete>
+          {todoIdList.done === true
+            ? "아직 완료되지 않았습니다"
+            : "완료되었습니다"}
+        </StP>
       </StDiv>
       {/* </div>
         );
@@ -81,6 +96,15 @@ const StH1 = styled.h1`
 
 const StP = styled.p`
   padding: 0px 24px;
+  ${(props) =>
+    props.complete &&
+    css`
+      text-align: right;
+      height: 30px;
+      font-weight: bold;
+      color: #c40303;
+      /* text-decoration: line-through; */
+    `}
 `;
 
 export default Todo;
