@@ -7,7 +7,7 @@ function List(props) {
       <StDiv key={props.todo.id}>
         {/* <a href="https://www.naver.com">상세보기</a> */}
         <Link to={`/lists/${props.todo.id}`}>
-          <span style={{ cursor: "pointer" }}>상세보기</span>
+          <StSpan>상세보기</StSpan>
         </Link>
         <StH4>{props.todo.title}</StH4>
         <StH6>{props.todo.toDo}</StH6>
@@ -63,6 +63,12 @@ const StDiv = styled.div`
   border: 5px solid rgb(1, 87, 65);
   border-radius: 10px;
 `;
+
+const StSpan = styled.span`
+  color: black;
+  cursor: pointer;
+`;
+
 export default List;
 
 /*
