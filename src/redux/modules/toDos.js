@@ -76,7 +76,9 @@ const toDo = (state = initialState, action) => {
           // console.log(action.payload);
           return todo.id === action.payload.id
             ? { ...todo, done: !action.payload.done }
-            : { ...todo };
+            : // !todo.done 으로 작성해도 값은 같이 나오는데
+              // 불변성의 규칙에 어긋난 것인지?
+              { ...todo };
           // console.log(action.payload);
           /*
           if (todo.id === action.payload.id) {

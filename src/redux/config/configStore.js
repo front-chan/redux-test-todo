@@ -1,6 +1,6 @@
 import { createStore } from "redux";
 import { combineReducers } from "redux";
-import toDo from "../modules/todo";
+import toDo from "../modules/toDos";
 
 const rootReducer = combineReducers({
   //   counter: counter, // Store와 module을 연결시켜 줌

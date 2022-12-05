@@ -1,20 +1,26 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
 function List(props) {
   return (
-    <StDiv key={props.todo.id}>
-      <a href="https://www.naver.com">상세보기</a>
-      <StH4>{props.todo.title}</StH4>
-      <StH6>{props.todo.toDo}</StH6>
-      <div>
-        <StButton delete onClick={() => props.onDeleteToDo(props.todo.id)}>
-          삭제하기
-        </StButton>
-        <StButton complete onClick={() => props.onChangeToDo(props.todo)}>
-          {props.todo.done === true ? "완료" : "취소"}
-        </StButton>
-      </div>
-    </StDiv>
+    <div>
+      <StDiv key={props.todo.id}>
+        {/* <a href="https://www.naver.com">상세보기</a> */}
+        <Link to={`/lists/${props.todo.id}`}>
+          <span style={{ cursor: "pointer" }}>상세보기</span>
+        </Link>
+        <StH4>{props.todo.title}</StH4>
+        <StH6>{props.todo.toDo}</StH6>
+        <div>
+          <StButton delete onClick={() => props.onDeleteToDo(props.todo.id)}>
+            삭제하기
+          </StButton>
+          <StButton complete onClick={() => props.onChangeToDo(props.todo)}>
+            {props.todo.done === true ? "완료" : "취소"}
+          </StButton>
+        </div>
+      </StDiv>
+    </div>
   );
 }
 
@@ -58,3 +64,36 @@ const StDiv = styled.div`
   border-radius: 10px;
 `;
 export default List;
+
+/*
+import React from "react";
+import { Link } from "react-router-dom";
+
+const data = [
+  { id: 1, todo: "리액트 배우기" },
+  { id: 2, todo: "노드 배우기" },
+  { id: 3, todo: "자바스크립트 배우기" },
+  { id: 4, todo: "파이어 베이스 배우기" },
+  { id: 5, todo: "넥스트 배우기" },
+  { id: 6, todo: "HTTP 프로토콜 배우기" },
+];
+
+function Works() {
+  return (
+    <div>
+      {data.map((work) => {
+        return (
+          <div key={work.id}>
+            <div>할일: {work.id}</div>
+            <Link to={`/lists/${work.id}`}>
+              <span style={{ cursor: "pointer" }}>➡️ Go to: {work.todo}</span>
+            </Link>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+export default Works;
+*/
