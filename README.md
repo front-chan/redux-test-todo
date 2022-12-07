@@ -17,3 +17,7 @@ redux 사용 과제
   - Todo의 내용
   - `이전으로` 버튼
     (`이전으로` 버튼을 클릭하면 리스트 화면으로 되돌아 간다)
+
+### 완성 페이지
+
+👉🏻 [![TodoList](https://img.shields.io/badge/Redux.TodoList-black.svg?&style=flat&for-the-badge&logo=GoogleChrome&logoColor=white)](https://choisinyoung-redux-test-todo.vercel.app)
