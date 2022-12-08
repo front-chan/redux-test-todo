@@ -3,16 +3,11 @@ import styled from "styled-components";
 
 const Home = () => {
   const navigate = useNavigate();
+  const linkGo = () => navigate("/lists");
 
   return (
     <StDiv>
-      <StButton
-        onClick={() => {
-          navigate("/lists");
-        }}
-      >
-        TodoList로 이동
-      </StButton>
+      <StButton onClick={linkGo}>TodoList로 이동</StButton>
     </StDiv>
   );
 };

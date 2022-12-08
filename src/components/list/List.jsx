@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
-function List(props) {
+const List = (props) => {
   return (
     <div>
       <StDiv key={props.todo.id}>
@@ -16,13 +16,13 @@ function List(props) {
             삭제하기
           </StButton>
           <StButton complete onClick={() => props.onChangeToDo(props.todo)}>
-            {props.todo.done === true ? "완료" : "취소"}
+            {props.todo.done ? "완료" : "취소"}
           </StButton>
         </div>
       </StDiv>
     </div>
   );
-}
+};
 
 const StH4 = styled.h4`
   font-size: 1.8rem;

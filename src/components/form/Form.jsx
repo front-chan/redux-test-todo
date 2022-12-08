@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Form(props) {
+const Form = (props) => {
   return (
     <StForm onSubmit={props.onSubmit}>
       <div>
@@ -24,7 +24,7 @@ function Form(props) {
       <StButton>추가하기</StButton>
     </StForm>
   );
-}
+};
 
 const StForm = styled.form`
   border-radius: 10px;

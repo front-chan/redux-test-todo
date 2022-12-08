@@ -27,41 +27,37 @@ const TodoList = () => {
   //   // setToDos([...toDos, newToDo]);
   // }
 
-  function onSubmit(e) {
+  const onSubmit = (e) => {
+    const newTodo = {
+      // payload의 값
+      id: Math.floor(Math.random() * 100000),
+      title,
+      toDo,
+      done: true,
+    };
     e.preventDefault();
     if (title === "" && toDo === "") {
       return;
     }
     setTitle("");
     setToDo("");
-    dispatch(
-      addToDo({
-        // payload의 값
-        id: Math.floor(Math.random() * 100000),
-        title,
-        toDo,
-        done: true,
-      })
-    );
-  }
+    dispatch(addToDo(newTodo));
+  };
 
-  function onDeleteToDo(id) {
-    // const newToDo = todos.filter((todo) => (todo.id = id));
-    dispatch(deleteToDo(id));
-  }
+  const onDeleteToDo = (id) => dispatch(deleteToDo(id));
+  // const newToDo = todos.filter((todo) => (todo.id = id));
+
   // function onChangeHandler(event) {
   //   setTitle(event.target.value);
   // }
   // console.log(title);
 
-  function onChangeToDo(todos) {
-    // console.log(id, done);
-    // console.log(todos);
-    dispatch(changeToDo(todos));
-    // delete는 id인데 change는 todos 전체 배열을 가지고 오는이유?
-    // parameter로 받아오는 값인데 전체 배열을 가지고 오는것인지?
-    // >> List의 changeToDo의 parameter값이 props.todo이기 때문
-  }
+  const onChangeToDo = (todos) => dispatch(changeToDo(todos));
+  // console.log(id, done);
+  // console.log(todos);
+  // delete는 id인데 change는 todos 전체 배열을 가지고 오는이유?
+  // parameter로 받아오는 값인데 전체 배열을 가지고 오는것인지?
+  // >> List의 changeToDo의 parameter값이 props.todo이기 때문
 
   return (
     <StDiv app>
@@ -78,7 +74,7 @@ const TodoList = () => {
           <h1>Woring...🔥</h1>
           <StDiv section>
             {todos.map((todo) =>
-              todo.done === true ? (
+              todo.done ? (
                 <List
                   key={todo.id}
                   todo={todo}
@@ -93,7 +89,7 @@ const TodoList = () => {
           <h1>Done..!🎉</h1>
           <StDiv section>
             {todos.map((todo) =>
-              todo.done === false ? (
+              !todo.done ? (
                 <List
                   key={todo.id}
                   todo={todo}

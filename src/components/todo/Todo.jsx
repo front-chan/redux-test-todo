@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-function Todo() {
+const Todo = () => {
   const param = useParams();
   const todos = useSelector((state) => state.toDo.toDos);
-  console.log(todos);
+  // console.log(todos);
   const todoIdList = todos.find((todo) => todo.id === parseInt(param.id));
-  console.log(todoIdList);
+  // console.log(todoIdList);
   return (
     <StDiv todo>
       {/* {todoIdList.map((todo) => {
@@ -37,9 +37,7 @@ function Todo() {
           <StP>{todoIdList.toDo}</StP>
         </div>
         <StP complete>
-          {todoIdList.done === true
-            ? "아직 완료되지 않았습니다"
-            : "완료되었습니다"}
+          {todoIdList.done ? "아직 완료되지 않았습니다" : "완료되었습니다"}
         </StP>
       </StDiv>
       {/* </div>
@@ -47,7 +45,7 @@ function Todo() {
       })} */}
     </StDiv>
   );
-}
+};
 
 const StDiv = styled.div`
   ${(props) =>

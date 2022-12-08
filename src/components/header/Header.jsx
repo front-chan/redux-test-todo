@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-function Header() {
+const Header = () => {
   return (
     <StDiv>
       <Link to={`/`}>
@@ -11,7 +11,7 @@ function Header() {
       <span>React</span>
     </StDiv>
   );
-}
+};
 
 const StDiv = styled.div`
   background-color: black;

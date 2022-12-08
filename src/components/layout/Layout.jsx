@@ -20,15 +20,15 @@ const layoutStyles = {
   minHeight: "90vh",
 };
 
-function Footer() {
+const Footer = () => {
   return (
     <div style={{ ...FooterStyles }}>
       <span>copyright @ CHAN</span>
     </div>
   );
-}
+};
 
-function Layout({ children }) {
+const Layout = ({ children }) => {
   return (
     <div>
       <Header />
@@ -36,6 +36,6 @@ function Layout({ children }) {
       <Footer />
     </div>
   );
-}
+};
 
 export default Layout;
